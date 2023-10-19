@@ -1,9 +1,11 @@
 package com.example.pokedex.common.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.pokedex.ui.screens.DetailScreen
 import com.example.pokedex.ui.screens.PokedexScreen
 
@@ -20,7 +22,18 @@ fun Navigation() {
     )
     {
         // composable define partes de una pantalla
-        composable(Routes.PokedexScreen.route) { PokedexScreen() }
-        composable(Routes.DetailScreen.route) { DetailScreen() }
+        composable(Routes.PokedexScreen.route) { PokedexScreen()
+            {
+                id ->
+                navController.navigate(Routes.DetailScreen.createRoute(id))
+            }
+        }
+
+        composable(Routes.DetailScreen.route, arguments = listOf(
+            navArgument("id")
+            {
+                type = NavType.IntType
+            }
+        )) { DetailScreen( it.arguments?.getInt("id")?:0) }
     }
 }
