@@ -167,10 +167,11 @@ fun MainContent(listPokemon: List<PokemonEntity>? ,
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 //Para el otro diseño, comenta esta linea
-                //.verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState())
         ) {
 
-            // Aqui va el lazy vertical grid
+            /*
+            // Aqui va el lazy vertical grid para el otro diseño
             LazyVerticalGrid(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -182,8 +183,9 @@ fun MainContent(listPokemon: List<PokemonEntity>? ,
                     }
                 }
             )
+            */
 
-            /*
+
             listPokemon.forEach {
                 CardPokemonItem(it) {
                     id ->
@@ -191,7 +193,7 @@ fun MainContent(listPokemon: List<PokemonEntity>? ,
                 }
                 Spacer(modifier = Modifier.height(8.dp))
             }
-            */
+
 
             /*
             Lazy Column sirve para solo mostrar listas u objetos, pero si se quiere añadir
