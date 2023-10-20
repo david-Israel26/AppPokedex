@@ -34,6 +34,9 @@ fun Navigation() {
             {
                 type = NavType.IntType
             }
-        )) { DetailScreen( it.arguments?.getInt("id")?:0) }
+        )) { DetailScreen( it.arguments?.getInt("id")?:0)
+        {
+            navController.popBackStack()
+        }}
     }
 }

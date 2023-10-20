@@ -28,6 +28,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -109,10 +110,7 @@ fun PokedexScreen(onNavigation: (Int) -> Unit) {
             //Centrar elementos de TopBar ( titulo - Text para pintar textos (pide un texto que es
             // el nombre de la app)
             CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color.DarkGray
-                ),
-                title = { Text(stringResource(id = R.string.app_name)) },
+                title = { Text(stringResource(id = R.string.app_name))},
                 )
         },
         content = {
@@ -152,6 +150,10 @@ fun MainContent(listPokemon: List<PokemonEntity>? ,
     if (listPokemon == null) {
         // Composable para indicar que esta cargando
         // Colocando el circulo de carga en medio de la pantalla
+        /*
+        Otra forma de alinear al centro
+        Box(modifier = Modifier.fillMaxSize()) { CircularProgressIndicator( modifier = Modifier.align(Alignment.Center)}
+         */
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -217,7 +219,7 @@ fun MainContent(listPokemon: List<PokemonEntity>? ,
                 Text(text = "Siguiente")
             }
 
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = {  }) {
                 Text(text = "Atras")
             }
 
@@ -247,7 +249,7 @@ fun CardPokemonItem(pokemonEntity: PokemonEntity, callback: (Int) -> Unit) {
 
             // Fila 1 - Parte superior
             Row(
-                // Ocupa todo el espacio de la fila
+                // Ocupa completamente el espacio de la fila
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
@@ -255,10 +257,10 @@ fun CardPokemonItem(pokemonEntity: PokemonEntity, callback: (Int) -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 // Mostrando en pantalla el ID del pokemon
-                Text(text = formatId(pokemonEntity.id))
+                Text(text = formatId(pokemonEntity.id), style = MaterialTheme.typography.labelMedium)
                 // Mostrando en pantalla el nombre del pokemon - haciendo uso de la funcion
                 // capitalizeFirstLetter de Utils.kt
-                Text(text = pokemonEntity.name.capitalizeFirstLetter())
+                Text(text = pokemonEntity.name.capitalizeFirstLetter(), style = MaterialTheme.typography.labelLarge)
             }
 
             // Fila 2 - Parte inferior

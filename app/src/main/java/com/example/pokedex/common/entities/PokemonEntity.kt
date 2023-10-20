@@ -11,5 +11,6 @@ data class PokemonEntity(
     @SerializedName("weight")
     var peso: Double,
     var types: List<Types>,
-    var sprites: Sprites
+    var sprites: Sprites,
+    var base_experience : Int
 )

@@ -6,8 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.pokedex"
-    compileSdk = 33
-
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.example.pokedex"
         minSdk = 24
@@ -59,6 +58,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     //  Room 2.4.1 Base de datos SQLite
     implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.compose.ui:ui-text-android:1.5.4")
     kapt("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
     //  Coil Cargar Imagenes desde servicio o locales
