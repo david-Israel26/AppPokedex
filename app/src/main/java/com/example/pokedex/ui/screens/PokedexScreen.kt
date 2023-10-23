@@ -91,7 +91,7 @@ fun PokedexScreen(onNavigation: (Int) -> Unit) {
                 val response = service.getPokemonInfo(index.toString())
 
                 tempList.add(response)
-                if (tempList.size == 20) {
+                if (tempList.size == 10) {
                     // Actualizar el elemento de la variable
                     // Ordenando los IDs por orden
                     pokemonListState.value = tempList.toList().sortedBy { it.id }
@@ -134,6 +134,11 @@ fun PokedexScreen(onNavigation: (Int) -> Unit) {
                         // Para mostrar el circulo de carga
                         pokemonListState.value = null
                     },
+                    callback2 ={
+                        offset.value -= 10
+                        limit.value -= 10
+                        pokemonListState.value = null
+                    },
                     onNavigation = {
                         onNavigation(it)
                     })
@@ -145,7 +150,7 @@ fun PokedexScreen(onNavigation: (Int) -> Unit) {
 // Mi composable
 @Composable
 fun MainContent(listPokemon: List<PokemonEntity>? ,
-                callback: () -> Unit, onNavigation: (Int) -> Unit)
+                callback: () -> Unit, callback2: () -> Unit, onNavigation: (Int) -> Unit)
 {
     if (listPokemon == null) {
         // Composable para indicar que esta cargando
@@ -215,12 +220,19 @@ fun MainContent(listPokemon: List<PokemonEntity>? ,
                     }
                 })
             */
-            Button(onClick = { callback() }) {
-                Text(text = "Siguiente")
-            }
+            Row (
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalArrangement = Arrangement.Center
 
-            Button(onClick = {  }) {
-                Text(text = "Atras")
+            ){
+                Button(onClick = { callback() }) {
+                    Text(text = "Siguiente")
+                }
+
+                Button(onClick = {  callback2() }) {
+                    Text(text = "Atras")
+                }
             }
 
         }
